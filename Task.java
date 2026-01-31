@@ -82,4 +82,42 @@ public class Task {
     }
 
     // Convert to JSON string [will use Jackson library later (manual converting)]
+
+    public String toJson() {
+        return (
+            "{" +
+            "\"id\":" +
+            id +
+            "," +
+            "\"description\":\"" +
+            escapeJson(description) +
+            "\"," +
+            "\"status\":\"" +
+            status +
+            "\"," +
+            "\"createdAt\":\"" +
+            createdAt +
+            "\"," +
+            "\"updatedAt\":\"" +
+            updatedAt +
+            "\"" +
+            "}"
+        );
+    }
+
+    // Escape special characters for JSON
+    private String escapeJson(String text) {
+        return text
+            .replace("\\", "\\\\")
+            .replace("\"", "\\\"")
+            .replace("\n", "\\n")
+            .replace("\r", "\\r")
+            .replace("\t", "\\t");
+    }
+
+    // Display task (for listing)
+    @Override
+    public String toString() {
+        return "[" + id + "] " + description + " - " + status;
+    }
 }
